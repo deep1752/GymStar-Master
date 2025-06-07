@@ -1,36 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from 'next/navigation';
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useAdmin } from "@/context/AdminContext";
 
-const AdminWithAuth = (WrappedComponent) => {
-  return function ProtectedRoute(props) {
-    const router = useRouter();
-    const [authChecked, setAuthChecked] = useState(false);
+const AdminWithAuth = ({ children }) => {
+  const router = useRouter();
+  const { isAdminAuthenticated, loading, isLoggingOut } = useAdmin();
 
-    useEffect(() => {
-      // Check auth synchronously right after mount
-      const token = localStorage.getItem("admin_token");
-      const role = localStorage.getItem("admin_role");
-
-      if (!token || role !== "admin") {
-        toast.error("Unauthorized access");
-        router.replace("/admin"); // replace instead of push to prevent back navigation
-        return;
-      }
-
-      setAuthChecked(true);
-    }, [router]);
-
-    // Don't render anything until auth is verified
-    if (!authChecked) {
-      return null;
+  useEffect(() => {
+    if (!loading && !isAdminAuthenticated && !isLoggingOut) {
+      toast.error("Unauthorized access");
+      router.replace("/admin");
     }
+  }, [loading, isAdminAuthenticated, router, isLoggingOut]);
 
-    // Only render if authenticated
-    return <WrappedComponent {...props} />;
-  };
+  if (loading) return <div className="admin-loading">Loading...</div>;
+  if (!isAdminAuthenticated) return null;
+
+  return children;
 };
 
 export default AdminWithAuth;

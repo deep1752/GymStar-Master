@@ -12,6 +12,7 @@ export const AdminProvider = ({ children }) => {
   const [adminDetails, setAdminDetails] = useState(null);
   const [token, setToken] = useState('');
   const [loading, setLoading] = useState(true);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   // Initialize admin session on mount
   useEffect(() => {
@@ -24,7 +25,7 @@ export const AdminProvider = ({ children }) => {
           // Set initial state from localStorage
           setToken(storedToken);
           setAdmin(JSON.parse(storedAdmin));
-          
+
           // Fetch fresh data from API
           const [profileRes, adminRes] = await Promise.all([
             axios.get('http://127.0.0.1:8000/users/profile', {
@@ -96,12 +97,15 @@ export const AdminProvider = ({ children }) => {
   };
 
   const logout = () => {
+    setIsLoggingOut(true);
     setAdmin(null);
     setAdminDetails(null);
     setToken('');
     localStorage.removeItem('admin_token');
     localStorage.removeItem('admin_user');
+    toast.success('Logged out successfully');
     router.push('/admin');
+    setTimeout(() => setIsLoggingOut(false), 1000);
   };
 
   const updateAdminProfile = (updatedProfile) => {
@@ -116,14 +120,15 @@ export const AdminProvider = ({ children }) => {
   const isAdminAuthenticated = !!admin && !!token;
 
   return (
-    <AdminContext.Provider value={{ 
-      admin, 
+    <AdminContext.Provider value={{
+      admin,
       adminDetails,
-      token, 
+      token,
       loading,
-      login, 
-      logout, 
+      login,
+      logout,
       isAdminAuthenticated,
+      isLoggingOut,
       updateAdminProfile,
       updateAdminDetails
     }}>
@@ -133,3 +138,7 @@ export const AdminProvider = ({ children }) => {
 };
 
 export const useAdmin = () => useContext(AdminContext);
+
+
+
+

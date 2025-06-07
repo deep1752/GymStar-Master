@@ -12,9 +12,6 @@ export default function RootLayout({ children }) {
   const pathname = usePathname();
   const isLoginPage = pathname === '/admin';
 
-  // ✅ Apply auth check only to protected routes, not the login page
-  const ProtectedChildren = !isLoginPage ? AdminWithAuth(() => children) : () => children;
-
   return (
     <html lang="en">
       <body className={!isLoginPage ? "admin-layout" : ""}>
@@ -28,7 +25,7 @@ export default function RootLayout({ children }) {
                 <div className="logo">Admin Panel</div>
                 <nav>
                   <ul>
-                    <li><Link href="/admin/dashbord">Dashboard</Link></li>
+                    <li><Link href="/admin/dashboard">Dashboard</Link></li>
                     <li><Link href="/admin/user">Customers</Link></li>
                     <li><Link href="/admin/membership">Membership Plans</Link></li>
                     <li><Link href="/admin/class">Classes</Link></li>
@@ -41,7 +38,7 @@ export default function RootLayout({ children }) {
               <div className="main-content-wrapper">
                 <AdminHeader />
                 <main className="admin-main-content">
-                  <ProtectedChildren />
+                  <AdminWithAuth>{children}</AdminWithAuth>
                 </main>
                 <AdminFooter />
               </div>
