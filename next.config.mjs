@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  trailingSlash: false,
-  output: 'standalone', // Enable SSR-compatible output
+    trailingSlash: false,
 };
 
-// export default nextConfig;
+export default nextConfig;
