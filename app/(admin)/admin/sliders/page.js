@@ -8,6 +8,7 @@ import autoTable from "jspdf-autotable";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import { toast } from "sonner";
+import Image from "next/image"; // Add at the top
 
 export default function SliderManager({ onEdit, onAdd }) {
   const router = useRouter();
@@ -231,7 +232,7 @@ export default function SliderManager({ onEdit, onAdd }) {
             {filteredSliders.length === 0 ? (
               <tr>
                 <td colSpan="6" className="no-users-found">
-                  🔍 No sliders found matching "{searchTerm}"
+                  🔍 No sliders found matching &quot;{searchTerm}&quot;
                 </td>
               </tr>
             ) : (
@@ -245,11 +246,13 @@ export default function SliderManager({ onEdit, onAdd }) {
                     />
                   </td>
                   <td>
-                    <img
+                    <Image
                       src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${slider.image}`}
                       alt={slider.title}
+                      width={80}
+                      height={50} // adjust height accordingly
                       className="slider-image-thumb"
-                      style={{ width: "80px", borderRadius: "6px" }}
+                      style={{ borderRadius: "6px", objectFit: "cover" }}
                     />
                   </td>
                   <td>{slider.title}</td>

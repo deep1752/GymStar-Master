@@ -273,7 +273,7 @@ export default function MembershipPlanManager({ onEdit, onAdd }) {
               <th>Plan Info</th>
               <th>Status</th>
               <th>Actions</th>
-              
+
 
             </tr>
           </thead>
@@ -282,8 +282,9 @@ export default function MembershipPlanManager({ onEdit, onAdd }) {
             {filteredPlans.length === 0 ? (
               <tr>
                 <td colSpan="8" className="no-users-found">
-                  🔍 No plans found matching "{searchTerm}"
+                  🔍 No plans found matching &quot;{searchTerm}&quot;
                 </td>
+
               </tr>
             ) : (
               filteredPlans.map((plan) => (
