@@ -213,7 +213,7 @@ export default function TrainerManager({ onEdit, onAdd }) {
                     />
                   </td>
                   <td>
-                    // Inside your map/render
+                   {/* Inside your map/render */}
                     <Image
                       src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${trainer.image}`}
                       alt={trainer.name}

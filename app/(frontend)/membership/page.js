@@ -272,6 +272,7 @@ const MembershipPage = () => {
                         &quot;The only bad workout is the one that didn&apos;t happen. Invest in yourself today and unlock your full potential with our expert guidance and world-class facilities.&quot;
                     </p>
 
+
                     <p className="mb-4">
                         Every great journey begins with a single step. Your fitness transformation starts here.
                     </p>
@@ -424,9 +425,9 @@ const MembershipPage = () => {
                 <div className="text-center mt-5">
                     <h4 className="mb-3">Still Hesitating?</h4>
                     <p>
-                        &quot;Your body can stand almost anything. It&apos;s your mind you need to convince.
-                        Take the leap - your future self will thank you!&quot;
+                        &quot;Your body can stand almost anything. It&apos;s your mind you need to convince. Take the leap - your future self will thank you!&quot;
                     </p>
+
 
                 </div>
             </div>
