@@ -4,4 +4,4 @@ const nextConfig = {
   output: 'standalone', // Enable SSR-compatible output
 };
 
-export default nextConfig;
+// export default nextConfig;
