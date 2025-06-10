@@ -260,8 +260,8 @@ const MembershipPage = () => {
                 {hasTwoOrMoreActiveSubscriptions() && (
                     <div className="alert alert-warning text-center mb-4">
                         <i className="bi bi-exclamation-triangle-fill me-2"></i>
-                        You've reached the maximum number of active subscriptions (2).
-                        You can't subscribe to additional plans until one of your current subscriptions expires.
+                        You&apos;ve reached the maximum number of active subscriptions (2).
+                        You can&apos;t subscribe to additional plans until one of your current subscriptions expires.
                     </div>
                 )}
 
