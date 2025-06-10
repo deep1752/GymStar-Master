@@ -130,7 +130,7 @@ const ProfilePage = () => {
     try {
       // Make API request to update user
       const response = await axios.put(
-        `http://127.0.0.1:8000/users/update/${user.id}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/update/${user.id}`,
         updatedData,
         {
           headers: { Authorization: `Bearer ${token}` },

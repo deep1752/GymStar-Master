@@ -43,7 +43,7 @@ export default function EditClass() {
   const classId = params?.id;
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/trainer/get_all")
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trainer/get_all`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch trainers");
         return res.json();
@@ -58,7 +58,7 @@ export default function EditClass() {
   useEffect(() => {
     if (!classId) return;
 
-    fetch(`http://127.0.0.1:8000/classes/get_by_id/${classId}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/classes/get_by_id/${classId}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch class");
         return res.json();
@@ -124,7 +124,7 @@ export default function EditClass() {
     };
 
     try {
-      const res = await fetch(`http://127.0.0.1:8000/classes/update/${classId}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/classes/update/${classId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

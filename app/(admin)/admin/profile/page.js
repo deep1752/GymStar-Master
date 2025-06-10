@@ -29,7 +29,7 @@ export default function AdminProfile() {
       if (!editField) return;
 
       const updated = { ...adminProfile, [editField]: fieldValue };
-      await axios.put(`http://127.0.0.1:8000/users/update/${adminProfile.id}`, updated, {
+      await axios.put(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/update/${adminProfile.id}`, updated, {
         headers: { Authorization: `Bearer ${token}` },
       });
       updateAdminProfile(updated);

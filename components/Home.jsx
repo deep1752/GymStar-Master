@@ -24,7 +24,7 @@ const Home = () => {
     // Fetch admin details
     useEffect(() => {
         const fetchAdminDetails = async () => {
-            const response = await fetch('http://127.0.0.1:8000/admin/get_by_id/1');
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/get_by_id/1`);
             const data = await response.json();
             setAdminDetails(data);
         };
@@ -35,7 +35,7 @@ const Home = () => {
     // Fetch trainers count
     useEffect(() => {
         const fetchTrainersCount = async () => {
-            const response = await fetch('http://127.0.0.1:8000/trainer/get_all');
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trainer/get_all`);
             const data = await response.json();
             setTrainersCount(data.length); // Assuming the API returns an array of trainers
         };
@@ -54,7 +54,7 @@ const Home = () => {
     const [trainerMap, setTrainerMap] = useState({}); // id -> name
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/classes/get_all')
+        axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/classes/get_all`)
             .then(async (response) => {
                 const classes = response.data;
 
@@ -72,7 +72,7 @@ const Home = () => {
 
                 // Fetch all trainer details
                 const trainerPromises = trainerIds.map(id =>
-                    axios.get(`http://127.0.0.1:8000/trainer/get_by_id/${id}`)
+                    axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trainer/get_by_id/${id}`)
                         .then(res => ({ id, name: res.data.name }))
                         .catch(err => {
                             console.error(`Error fetching trainer ${id}:`, err);

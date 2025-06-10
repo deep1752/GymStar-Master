@@ -24,7 +24,7 @@ export default function MembershipPlanManager({ onEdit, onAdd }) {
 
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/membership/get_all")
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/membership/get_all`)
       .then((res) => res.json())
       .then((data) => {
         setPlans(data);
@@ -47,13 +47,13 @@ export default function MembershipPlanManager({ onEdit, onAdd }) {
       // For each membership, first find and delete its plan info
       for (const id of idList) {
         // Fetch plan info for this membership
-        const infoRes = await fetch(`http://127.0.0.1:8000/planInfo/get_by_membership_id/${id}`);
+        const infoRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/planInfo/get_by_membership_id/${id}`);
         const infoData = await infoRes.json();
 
         if (infoData && infoData.length > 0) {
           // Delete each plan info record
           for (const info of infoData) {
-            await fetch(`http://127.0.0.1:8000/planInfo/delete/${info.id}`, {
+            await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/planInfo/delete/${info.id}`, {
               method: "DELETE",
             });
           }
@@ -62,7 +62,7 @@ export default function MembershipPlanManager({ onEdit, onAdd }) {
 
       // Then delete the membership plans
       const deletePlanRequests = idList.map((id) =>
-        fetch(`http://127.0.0.1:8000/membership/delete/${id}`, {
+        fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/membership/delete/${id}`, {
           method: "DELETE",
         })
       );
@@ -111,7 +111,7 @@ export default function MembershipPlanManager({ onEdit, onAdd }) {
     setInfoLoading(true);
     setShowModal(true);
     try {
-      const res = await fetch(`http://127.0.0.1:8000/planInfo/get_by_membership_id/${membershipId}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/planInfo/get_by_membership_id/${membershipId}`);
       const data = await res.json();
       if (Array.isArray(data) && data.length > 0) {
         setPlanInfo(data[0]);
@@ -134,7 +134,7 @@ export default function MembershipPlanManager({ onEdit, onAdd }) {
     const updatedPlan = { ...plan, status: updatedStatus };
 
     try {
-      const response = await fetch(`http://127.0.0.1:8000/membership/update/${plan.id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/membership/update/${plan.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

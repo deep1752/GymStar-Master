@@ -48,7 +48,7 @@ export default function ChangePassword() {
       const token = localStorage.getItem('admin_token');
 
       await axios.put(
-        `http://127.0.0.1:8000/users/update-password/${admin.id}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/update-password/${admin.id}`,
         {
           new_password: newPassword,
           confirm_password: confirmPassword

@@ -28,10 +28,10 @@ export const AdminProvider = ({ children }) => {
 
           // Fetch fresh data from API
           const [profileRes, adminRes] = await Promise.all([
-            axios.get('http://127.0.0.1:8000/users/profile', {
+            axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/profile`, {
               headers: { Authorization: `Bearer ${storedToken}` },
             }),
-            axios.get('http://127.0.0.1:8000/admin/get_by_id/1')
+            axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/get_by_id/1`)
           ]);
 
           const profile = profileRes.data;
@@ -58,7 +58,7 @@ export const AdminProvider = ({ children }) => {
     try {
       setLoading(true);
       // First perform the login to get the token
-      const loginRes = await axios.post('http://127.0.0.1:8000/auth/login', {
+      const loginRes = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`, {
         email,
         password
       });
@@ -66,7 +66,7 @@ export const AdminProvider = ({ children }) => {
       const { access_token } = loginRes.data;
 
       // Then fetch the profile with the new token
-      const profileRes = await axios.get('http://127.0.0.1:8000/users/profile', {
+      const profileRes = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/profile`, {
         headers: { Authorization: `Bearer ${access_token}` },
       });
 
@@ -76,7 +76,7 @@ export const AdminProvider = ({ children }) => {
       }
 
       // Fetch admin details
-      const adminRes = await axios.get('http://127.0.0.1:8000/admin/get_by_id/1');
+      const adminRes = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/get_by_id/1`);
 
       // Update all state and storage
       setAdmin(profile);

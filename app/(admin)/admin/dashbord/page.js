@@ -36,12 +36,12 @@ export default function GymAdminDashboard () {
           trainersRes,
           classesRes
         ] = await Promise.all([
-          axios.get('http://127.0.0.1:8000/users/'),
-          axios.get('http://127.0.0.1:8000/membership/get_all'),
-          axios.get('http://127.0.0.1:8000/subscription/'),
-          axios.get('http://127.0.0.1:8000/slider/get'),
-          axios.get('http://127.0.0.1:8000/trainer/get_all'),
-          axios.get('http://127.0.0.1:8000/classes/get_all')
+          axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/`),
+          axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/membership/get_all`),
+          axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/subscription/`),
+          axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/slider/get`),
+          axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trainer/get_all`),
+          axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/classes/get_all`)
         ]);
 
         setUsers(usersRes.data);

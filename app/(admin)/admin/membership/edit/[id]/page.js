@@ -18,8 +18,8 @@ export default function EditMembershipPlan() {
     const fetchData = async () => {
       try {
         const [planRes, infoRes] = await Promise.all([
-          fetch(`http://127.0.0.1:8000/membership/get/${planId}`),
-          fetch(`http://127.0.0.1:8000/planInfo/get_by_membership_id/${planId}`),
+          fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/membership/get/${planId}`),
+          fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/planInfo/get_by_membership_id/${planId}`),
         ]);
 
         if (!planRes.ok || !infoRes.ok) throw new Error("Failed to fetch data");
@@ -128,7 +128,7 @@ export default function EditMembershipPlan() {
 
     try {
       const updatePlanRes = await fetch(
-        `http://127.0.0.1:8000/membership/update/${planId}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/membership/update/${planId}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -142,7 +142,7 @@ export default function EditMembershipPlan() {
       );
 
       const updateInfoRes = await fetch(
-        `http://127.0.0.1:8000/planInfo/update_by_membership_id/${planId}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/planInfo/update_by_membership_id/${planId}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

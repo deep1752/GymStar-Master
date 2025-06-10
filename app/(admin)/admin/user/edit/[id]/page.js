@@ -14,7 +14,7 @@ export default function EditUser() {
   useEffect(() => {
     if (!userId) return;
 
-    fetch(`http://127.0.0.1:8000/users/get/${userId}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/get/${userId}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch user");
         return res.json();
@@ -95,7 +95,7 @@ export default function EditUser() {
     }
 
     try {
-      const res = await fetch(`http://127.0.0.1:8000/users/update/${userId}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/update/${userId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

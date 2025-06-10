@@ -81,7 +81,7 @@ export default function AddSlider() {
                 formData.append("status", slider.status);
                 formData.append("image", slider.image);
 
-                const res = await fetch("http://127.0.0.1:8000/slider/post", {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/slider/post`, {
                     method: "POST",
                     body: formData,
                 });

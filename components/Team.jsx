@@ -8,7 +8,7 @@ const Team = () => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/trainer/get_all")
+      .get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trainer/get_all`)
       .then((res) => setTrainers(res.data))
       .catch((err) => console.error("Error fetching trainers:", err));
   }, []);
@@ -46,7 +46,7 @@ const Team = () => {
                 <div className="position-relative overflow-hidden rounded">
                   <img
                     className="img-fluid w-100"
-                    src={`http://127.0.0.1:8000${trainer.image}`}
+                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${trainer.image}`}
                     alt={trainer.name}
                   />
                   <div className="team-overlay">

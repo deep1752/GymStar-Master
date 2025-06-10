@@ -48,14 +48,14 @@ const MembershipPage = () => {
         const fetchData = async () => {
             try {
                 // 1. Fetch all active membership plans
-                const plansResponse = await axios.get("http://127.0.0.1:8000/membership/get_all");
+                const plansResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/membership/get_all`);
                 const activePlans = plansResponse.data.filter(plan => plan.status === "active");
 
                 // 2. Fetch user subscriptions if logged in
                 let subscriptions = [];
                 if (user?.id) {
                     try {
-                        const subsResponse = await axios.get(`http://127.0.0.1:8000/subscription/by_user/${user.id}`);
+                        const subsResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/subscription/by_user/${user.id}`);
                         subscriptions = subsResponse.data;
                     } catch (subsError) {
                         if (subsError.response?.status === 404) {
@@ -70,7 +70,7 @@ const MembershipPage = () => {
                 // 3. Enrich each plan with its additional info
                 const enrichedPlans = await Promise.all(activePlans.map(async (plan) => {
                     try {
-                        const infoRes = await axios.get(`http://127.0.0.1:8000/planInfo/get_by_membership_id/${plan.id}`);
+                        const infoRes = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/planInfo/get_by_membership_id/${plan.id}`);
                         const planInfo = infoRes.data[0];
                         return { ...plan, planInfo };
                     } catch (infoErr) {

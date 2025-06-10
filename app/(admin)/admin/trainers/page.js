@@ -18,7 +18,7 @@ export default function TrainerManager({ onEdit, onAdd }) {
   const [selectAll, setSelectAll] = useState(false);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/trainer/get_all")
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trainer/get_all`)
       .then((res) => res.json())
       .then((data) => {
         setTrainers(data);
@@ -39,7 +39,7 @@ export default function TrainerManager({ onEdit, onAdd }) {
 
     try {
       const deleteRequests = idList.map((id) =>
-        fetch(`http://127.0.0.1:8000/trainer/delete/${id}`, {
+        fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trainer/delete/${id}`, {
           method: "DELETE",
         })
       );
@@ -212,7 +212,7 @@ export default function TrainerManager({ onEdit, onAdd }) {
                   </td>
                   <td>
                     <img
-                      src={`http://127.0.0.1:8000${trainer.image}`}
+                      src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${trainer.image}`}
                       alt={trainer.name}
                       className="trainer-img"
                       style={{ width: "50px", height: "50px", borderRadius: "8px" }}

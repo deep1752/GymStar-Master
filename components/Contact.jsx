@@ -24,7 +24,7 @@ const Contact = () => {
         setAlert({ message: '', type: '' });
         
         try {
-            const res = await axios.post('http://localhost:8000/contact/', formData);
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/contact/`, formData);
             setAlert({
                 message: 'Message sent successfully! We will get back to you soon.',
                 type: 'success'

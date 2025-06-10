@@ -9,7 +9,7 @@ const Class = () => {
   const [trainerMap, setTrainerMap] = useState({}); // id -> name
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/classes/get_all')
+    axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/classes/get_all`)
       .then(async (response) => {
         const classes = response.data;
 
@@ -27,7 +27,7 @@ const Class = () => {
 
         // Fetch all trainer details
         const trainerPromises = trainerIds.map(id =>
-          axios.get(`http://127.0.0.1:8000/trainer/get_by_id/${id}`)
+          axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trainer/get_by_id/${id}`)
             .then(res => ({ id, name: res.data.name }))
             .catch(err => {
               console.error(`Error fetching trainer ${id}:`, err);

@@ -10,7 +10,7 @@ const Footer = () => {
   useEffect(() => {
     const fetchAdmin = async () => {
       try {
-        const res = await axios.get(`http://127.0.0.1:8000/admin/get_by_id/${adminId}`);
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/get_by_id/${adminId}`);
         setAdmin(res.data);
       } catch (error) {
         console.error("Failed to fetch admin data");

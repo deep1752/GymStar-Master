@@ -153,7 +153,7 @@ export default function AddMembershipPlan() {
         // Remove % symbol from discount before sending
         const cleanDiscount = plan.discount.replace('%', '');
 
-        const res = await fetch("http://127.0.0.1:8000/membership/create", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/membership/create`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -176,7 +176,7 @@ export default function AddMembershipPlan() {
 
         const membership = await res.json();
 
-        const infoRes = await fetch("http://127.0.0.1:8000/planInfo/post", {
+        const infoRes = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/planInfo/post`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

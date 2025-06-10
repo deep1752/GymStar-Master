@@ -94,7 +94,7 @@ const SuccessPay = () => {
         }
 
         // Get user's previous subscriptions
-        const prevSubResponse = await fetch(`http://127.0.0.1:8000/subscription/by_user/${user_id}`);
+        const prevSubResponse = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/subscription/by_user/${user_id}`);
         const prevSubs = await prevSubResponse.json();
 
         let newStartDate = new Date();
@@ -125,7 +125,7 @@ const SuccessPay = () => {
             throw new Error("Invalid plan type");
         }
 
-        const response = await fetch("http://127.0.0.1:8000/subscription", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/subscription`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

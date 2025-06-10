@@ -66,7 +66,7 @@ const ChangePasswordPage = () => {
       
       // Make API request to update password
       await axios.put(
-        `http://127.0.0.1:8000/users/update-password/${user?.id}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/update-password/${user?.id}`,
         formData,
         {
           headers: {

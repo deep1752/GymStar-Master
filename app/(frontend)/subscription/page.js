@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 // Base URL for API requests
-const API_BASE_URL = 'http://127.0.0.1:8000';
+const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}`;
 
 /**
  * Subscription Page Component

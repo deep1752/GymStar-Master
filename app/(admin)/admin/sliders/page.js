@@ -18,7 +18,7 @@ export default function SliderManager({ onEdit, onAdd }) {
   const [selectAll, setSelectAll] = useState(false);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/slider/get")
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/slider/get`)
       .then((res) => res.json())
       .then((data) => {
         setSliders(data);
@@ -39,7 +39,7 @@ export default function SliderManager({ onEdit, onAdd }) {
 
     try {
       const deleteRequests = idList.map((id) =>
-        fetch(`http://127.0.0.1:8000/slider/delete/${id}`, {
+        fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/slider/delete/${id}`, {
           method: "DELETE",
         })
       );
@@ -78,7 +78,7 @@ export default function SliderManager({ onEdit, onAdd }) {
     formData.append("status", newStatus);
 
     try {
-      const res = await fetch(`http://127.0.0.1:8000/slider/update/${slider.id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/slider/update/${slider.id}`, {
         method: "PUT",
         body: formData,
       });
@@ -246,7 +246,7 @@ export default function SliderManager({ onEdit, onAdd }) {
                   </td>
                   <td>
                     <img
-                      src={`http://127.0.0.1:8000/${slider.image}`}
+                      src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${slider.image}`}
                       alt={slider.title}
                       className="slider-image-thumb"
                       style={{ width: "80px", borderRadius: "6px" }}

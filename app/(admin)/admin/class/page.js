@@ -30,7 +30,7 @@ export default function ClassManager() {
     const router = useRouter();
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/classes/get_all")
+        fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/classes/get_all`)
             .then((res) => res.json())
             .then(async (data) => {
                 setClasses(data);
@@ -38,7 +38,7 @@ export default function ClassManager() {
                 const map = {};
                 for (const id of trainerIds) {
                     try {
-                        const res = await fetch(`http://127.0.0.1:8000/trainer/get_by_id/${id}`);
+                        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trainer/get_by_id/${id}`);
                         const trainer = await res.json();
                         map[id] = trainer.name;
                     } catch (err) {
@@ -90,7 +90,7 @@ export default function ClassManager() {
         try {
             const deleteRequests = indexList.map((index) => {
                 const classId = filteredClasses[index].id;  // ✅ Get actual class ID here
-                return fetch(`http://127.0.0.1:8000/classes/delete/${classId}`, {
+                return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/classes/delete/${classId}`, {
                     method: "DELETE",
                 });
             });

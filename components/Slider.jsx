@@ -7,7 +7,7 @@ const Slider = () => {
   const [sliders, setSliders] = useState([]);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/slider/get')
+    axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/slider/get`)
       .then(res => {
         const activeSliders = res.data.filter(slider => slider.status === 'active');
         setSliders(activeSliders);
@@ -23,7 +23,7 @@ const Slider = () => {
             <div key={item.id} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
               <img
                 className="w-100"
-                src={`http://127.0.0.1:8000/${item.image}`} 
+                src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${item.image}`} 
                 alt={item.title}  
               />
               <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">

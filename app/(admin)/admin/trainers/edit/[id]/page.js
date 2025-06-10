@@ -23,7 +23,7 @@ export default function EditTrainer() {
     useEffect(() => {
         if (!trainerId) return;
 
-        fetch(`http://127.0.0.1:8000/trainer/get_by_id/${trainerId}`)
+        fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trainer/get_by_id/${trainerId}`)
             .then((res) => {
                 if (!res.ok) throw new Error("Failed to fetch trainer");
                 return res.json();
@@ -39,7 +39,7 @@ export default function EditTrainer() {
                     image: null,
                 });
 
-                setExistingImage(`http://127.0.0.1:8000${trainer.image}`);
+                setExistingImage(`${process.env.NEXT_PUBLIC_API_BASE_URL}${trainer.image}`);
                 setLoading(false);
             })
             .catch((err) => {
@@ -94,7 +94,7 @@ export default function EditTrainer() {
         }
 
         try {
-            const res = await fetch(`http://127.0.0.1:8000/trainer/update/${trainerId}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trainer/update/${trainerId}`, {
                 method: "PUT",
                 body: data,
             });

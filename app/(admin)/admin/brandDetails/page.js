@@ -28,7 +28,7 @@ export default function BrandDetails() {
       if (!editField) return;
 
       const updated = { ...adminDetails, [editField]: fieldValue };
-      await axios.put(`http://127.0.0.1:8000/admin/update/${adminDetails.id}`, updated);
+      await axios.put(`${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/update/${adminDetails.id}`, updated);
       updateAdminDetails(updated);
       toast.success('Admin details updated');
       setEditField(null);
@@ -42,7 +42,6 @@ export default function BrandDetails() {
     setEditField(null);
     setFieldValue('');
   };
-
   const renderRow = (label, key, value) => (
     <div className="admin-profile-row" key={key}>
       <strong>{label}:</strong>

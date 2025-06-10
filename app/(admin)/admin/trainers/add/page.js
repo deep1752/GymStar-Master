@@ -97,7 +97,7 @@ export default function AddTrainer() {
                 formData.append("linkedin_link", trainer.linkedin_link);
                 formData.append("image", trainer.image);
 
-                const res = await fetch("http://127.0.0.1:8000/trainer/", {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trainer/`, {
                     method: "POST",
                     body: formData,
                 });

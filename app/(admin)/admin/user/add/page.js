@@ -93,7 +93,7 @@ export default function AddUser() {
     setLoading(true);
     try {
       for (const user of users) {
-        const res = await fetch("http://127.0.0.1:8000/auth/register", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/register`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

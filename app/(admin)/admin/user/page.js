@@ -19,7 +19,7 @@ export default function UserManager({ onEdit, onAdd }) {
   const [selectAll, setSelectAll] = useState(false);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/users/")
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/`)
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);
@@ -40,7 +40,7 @@ export default function UserManager({ onEdit, onAdd }) {
 
     try {
       const deleteRequests = idList.map((id) =>
-        fetch(`http://127.0.0.1:8000/users/delete/${id}`, {
+        fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/delete/${id}`, {
           method: "DELETE",
         })
       );

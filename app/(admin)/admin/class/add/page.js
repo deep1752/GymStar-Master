@@ -41,7 +41,7 @@ export default function AddClass() {
     useEffect(() => {
         const fetchTrainers = async () => {
             try {
-                const res = await fetch("http://127.0.0.1:8000/trainer/get_all");
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trainer/get_all`);
                 const data = await res.json();
                 setTrainers(data);
             } catch (error) {
@@ -95,15 +95,12 @@ export default function AddClass() {
         setErrors(newErrors);
         return !hasError;
     };
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validate()) {
             toast.error("❗ Please correct all required fields.");
             return;
         }
-
         // Prepare payload with correct timing
         const processedClasses = classes.map(cls => ({
             ...cls,
@@ -112,7 +109,7 @@ export default function AddClass() {
 
         try {
             setLoading(true);
-            const res = await fetch("http://127.0.0.1:8000/classes/create", {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/classes/create`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ classes: processedClasses }),

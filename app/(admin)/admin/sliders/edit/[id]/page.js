@@ -20,7 +20,7 @@ export default function EditSlider() {
   useEffect(() => {
     if (!sliderId) return;
 
-    fetch(`http://127.0.0.1:8000/slider/get/${sliderId}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/slider/get/${sliderId}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch slider");
         return res.json();
@@ -34,7 +34,7 @@ export default function EditSlider() {
         });
 
         // 👇 Prefix with base URL for correct image preview
-        setExistingImage(`http://127.0.0.1:8000/${slider.image}`);
+        setExistingImage(`${process.env.NEXT_PUBLIC_API_BASE_URL}/${slider.image}`);
 
         setLoading(false);
       })
@@ -82,7 +82,7 @@ export default function EditSlider() {
     }
 
     try {
-      const res = await fetch(`http://127.0.0.1:8000/slider/update/${sliderId}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/slider/update/${sliderId}`, {
         method: "PUT",
         body: data,
       });
