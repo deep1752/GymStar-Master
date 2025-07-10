@@ -11,7 +11,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const Home = () => {
     const [adminDetails, setAdminDetails] = useState(null);
-    const [trainersCount, setTrainersCount] = useState(0);
+    // const [trainersCount, setTrainersCount] = useState(0);
     const settings = {
         dots: true,
         infinite: true,
@@ -129,7 +129,6 @@ const Home = () => {
             .then((res) => setTrainers(res.data))
             .catch((err) => console.error("Error fetching trainers:", err));
     }, []);
-
 
 
 
@@ -342,7 +341,7 @@ const Home = () => {
                                 <div className="position-relative overflow-hidden rounded">
                                     <img
                                         className="img-fluid w-100"
-                                        src={`http://127.0.0.1:8000${trainer.image}`}
+                                        src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${trainer.image}`}
                                         alt={trainer.name}
                                     />
                                     <div className="team-overlay">
