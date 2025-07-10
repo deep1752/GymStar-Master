@@ -11,7 +11,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const Home = () => {
     const [adminDetails, setAdminDetails] = useState(null);
-    // const [trainersCount, setTrainersCount] = useState(0);
+    const [trainersCount, setTrainersCount] = useState(0);
     const settings = {
         dots: true,
         infinite: true,
